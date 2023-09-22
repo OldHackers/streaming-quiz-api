@@ -19,11 +19,11 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
-#aws:
-#  credentials:
-#    access-key: ${AWS_ACCESS_KEY_ID}
-#    secret-key: ${AWS_SECRET_ACCESS_KEY}
-#
-#  s3:
-#    bucket: ${AWS_S3_BUCKET_NAME}
-#    region: ${AWS_REGION}
+aws:
+  credentials:
+    access-key: ${AWS_ACCESS_KEY_ID}
+    secret-key: ${AWS_SECRET_ACCESS_KEY}
+
+  s3:
+    bucket: ${AWS_S3_BUCKET_NAME}
+    region: ${AWS_REGION}

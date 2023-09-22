@@ -15,8 +15,9 @@ public class VideoService {
     public VideoDto getVideoData(Long videoId) {
         Video video = videoRepository.findById(videoId).orElseThrow(IllegalAccessError::new);
 
-        return VideoDto.builder().url(video.getUrl()).quizzes(video.getQuizzes()).build();
+        return VideoDto.builder()
+                .url(video.getUrl())
+                .quizzes(video.getQuizzes())
+                .build();
     }
-
-
 }

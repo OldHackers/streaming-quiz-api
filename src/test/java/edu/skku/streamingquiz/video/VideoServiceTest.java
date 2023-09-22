@@ -17,5 +17,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class VideoServiceTest {
 
+    @Autowired VideoService videoService;
 
+//    @AfterEach
+//    void afterEach() {
+//        videoRepository.;
+//    }
+
+    @Test
+    void getVideoData() {
+        //given
+
+        //when
+
+        //then
+    }
 }
