@@ -1,16 +1,13 @@
 package edu.skku.streamingquiz.video;
 
+import com.github.f4b6a3.uuid.UuidCreator;
 import edu.skku.streamingquiz.quiz.Quiz;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,7 +16,11 @@ import java.util.List;
 @Builder
 public class Video {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 16)
+    private UUID uuid;
 
     private String title;
 
@@ -28,4 +29,9 @@ public class Video {
     @OneToMany(mappedBy = "video",
             cascade = CascadeType.ALL)
     private List<Quiz> quizzes;
+
+    @PrePersist
+    public void createUUID() {
+        this.uuid = UuidCreator.getTimeOrdered();
+    }
 }

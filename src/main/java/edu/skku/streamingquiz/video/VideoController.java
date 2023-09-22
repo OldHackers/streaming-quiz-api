@@ -27,8 +27,8 @@ public class VideoController {
     @GetMapping("/test/{videoId}")
     public VideoDto testVideo(@PathVariable Long videoId) {
 
-        Quiz quiz1 = new Quiz(1L,"q1", new ArrayList<>(),"ans1","comment1", new Video(), 1);
-        Quiz quiz2 = new Quiz(2L,"q2", new ArrayList<>(),"ans2","comment2", new Video(), 2);
+        Quiz quiz1 = new Quiz(1L,"q1", new ArrayList<>(),"ans1","comment1", null, 1);
+        Quiz quiz2 = new Quiz(2L,"q2", new ArrayList<>(),"ans2","comment2", null, 2);
 
         List<Quiz> quizzes =  new ArrayList<>();
         quizzes.add(quiz1);
@@ -40,9 +40,13 @@ public class VideoController {
                 .build();
     }
 
-    @PostMapping("video")
-    public String upload(@RequestBody UploadVideoRequest uploadVideoRequest){
+    @PostMapping()
+    public Video upload(@RequestBody UploadVideoRequest uploadVideoRequest){
+        return videoService.uploadVideo(uploadVideoRequest);
+    }
 
-        return "";
+    @PostMapping("/{videoId}/quiz")
+    public void createQuiz(@PathVariable Long videoId, @RequestBody CreateQuizRequest createQuizRequest) {
+        videoService.createQuiz(createQuizRequest);
     }
 }

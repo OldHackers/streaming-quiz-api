@@ -1,12 +1,10 @@
 package edu.skku.streamingquiz.quiz;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.skku.streamingquiz.choice.Choice;
 import edu.skku.streamingquiz.video.Video;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,8 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class Quiz {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String question;
@@ -27,9 +27,9 @@ public class Quiz {
 
     private String commentary;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "video_id")
+    @JsonIgnore
     private Video video;
 
     private Integer idx;

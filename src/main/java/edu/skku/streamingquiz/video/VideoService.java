@@ -1,5 +1,6 @@
 package edu.skku.streamingquiz.video;
 
+import edu.skku.streamingquiz.quiz.Quiz;
 import edu.skku.streamingquiz.quiz.QuizRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,26 @@ public class VideoService {
                 .url(video.getUrl())
                 .quizzes(video.getQuizzes())
                 .build();
+    }
+
+    public Video uploadVideo(UploadVideoRequest uploadVideoRequest) {
+        Video video = Video.builder()
+                .title(uploadVideoRequest.getTitle())
+                .url(uploadVideoRequest.getUrl())
+                .build();
+        return videoRepository.save(video);
+    }
+
+    public void createQuiz(CreateQuizRequest createQuizRequest) {
+        Video video = videoRepository.findById(createQuizRequest.getVideoId()).orElseThrow(IllegalAccessError::new);
+
+        Quiz quiz = Quiz.builder()
+                .video(video)
+                .answer(createQuizRequest.getAnswer())
+                .idx(createQuizRequest.getIdx())
+                .commentary(createQuizRequest.getCommentary())
+                .question(createQuizRequest.getQuestion())
+                .build();
+        quizRepository.save(quiz);
     }
 }
