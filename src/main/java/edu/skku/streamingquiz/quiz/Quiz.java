@@ -29,6 +29,6 @@ public class Quiz {
     @JoinColumn(name = "video_id")
     private Video video;
 
-    private Integer index;
+    private Integer idx;
 
 }

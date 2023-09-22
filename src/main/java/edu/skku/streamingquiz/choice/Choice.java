@@ -20,7 +20,7 @@ public class Choice {
     private Quiz quiz;
 
     private String content;
-    private Integer index;
+    private Integer choiceNumber;
     private Boolean isAnswer;
 
 }
