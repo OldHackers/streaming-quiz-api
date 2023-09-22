@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.skku.streamingquiz.choice.Choice;
 import edu.skku.streamingquiz.video.Video;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ public class Quiz {
 
     private String answer;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String commentary;
 
     @ManyToOne(fetch = FetchType.LAZY)

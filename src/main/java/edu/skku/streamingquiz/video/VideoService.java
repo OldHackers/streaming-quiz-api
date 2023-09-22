@@ -1,11 +1,13 @@
 package edu.skku.streamingquiz.video;
 
+import edu.skku.streamingquiz.choice.Choice;
+import edu.skku.streamingquiz.choice.ChoiceRepository;
 import edu.skku.streamingquiz.quiz.Quiz;
 import edu.skku.streamingquiz.quiz.QuizRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -13,6 +15,7 @@ import java.util.UUID;
 public class VideoService {
     private final VideoRepository videoRepository;
     private final QuizRepository quizRepository;
+    private final ChoiceRepository choiceRepository;
 
     public VideoDto getVideoData(UUID videoId) {
         Video video = videoRepository.findById(videoId).orElseThrow(IllegalAccessError::new);
@@ -31,8 +34,10 @@ public class VideoService {
         return videoRepository.save(video);
     }
 
-    public void createQuiz(CreateQuizRequest createQuizRequest) {
-        Video video = videoRepository.findById(createQuizRequest.getVideoId()).orElseThrow(IllegalAccessError::new);
+    public void createQuiz(UUID videoId, CreateQuizRequest createQuizRequest) {
+        Video video = videoRepository.findById(videoId).orElseThrow(IllegalAccessError::new);
+
+        List<String> choiceContents = createQuizRequest.getChoiceList();
 
         Quiz quiz = Quiz.builder()
                 .video(video)
@@ -41,7 +46,18 @@ public class VideoService {
                 .commentary(createQuizRequest.getCommentary())
                 .question(createQuizRequest.getQuestion())
                 .build();
+
         quizRepository.save(quiz);
+
+        for (int i = 0; i < choiceContents.size(); i++) {
+            Choice choice = Choice.builder()
+                    .quiz(quiz)
+                    .choiceNumber(i + 1)
+                    .content(choiceContents.get(i))
+                    .isAnswer(i + 1 == Integer.parseInt(quiz.getAnswer()))
+                    .build();
+            choiceRepository.save(choice);
+        }
     }
 
 //    public Video getVideoByUUID(UUID uuid) {
