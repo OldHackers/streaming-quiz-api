@@ -1,7 +1,9 @@
 package edu.skku.streamingquiz.video;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/video")
+@RestController
+@RequestMapping("/video")
 public class VideoController {
 }
