@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -13,7 +14,7 @@ public class VideoService {
     private final VideoRepository videoRepository;
     private final QuizRepository quizRepository;
 
-    public VideoDto getVideoData(Long videoId) {
+    public VideoDto getVideoData(UUID videoId) {
         Video video = videoRepository.findById(videoId).orElseThrow(IllegalAccessError::new);
 
         return VideoDto.builder()
@@ -42,4 +43,9 @@ public class VideoService {
                 .build();
         quizRepository.save(quiz);
     }
+
+//    public Video getVideoByUUID(UUID uuid) {
+//        return videoRepository.findByUuid(uuid).get();
+//    }
+
 }

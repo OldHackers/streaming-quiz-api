@@ -9,10 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/video")
@@ -21,11 +18,11 @@ public class VideoController {
 
     private final VideoService videoService;
     @GetMapping("/{videoId}")
-    public VideoDto video(@PathVariable Long videoId){
+    public VideoDto video(@PathVariable UUID videoId){
         return videoService.getVideoData(videoId);
     }
     @GetMapping("/test/{videoId}")
-    public VideoDto testVideo(@PathVariable Long videoId) {
+    public VideoDto testVideo(@PathVariable UUID videoId) {
 
         Quiz quiz1 = new Quiz(1L,"q1", new ArrayList<>(),"ans1","comment1", null, 1);
         Quiz quiz2 = new Quiz(2L,"q2", new ArrayList<>(),"ans2","comment2", null, 2);
@@ -49,4 +46,15 @@ public class VideoController {
     public void createQuiz(@PathVariable Long videoId, @RequestBody CreateQuizRequest createQuizRequest) {
         videoService.createQuiz(createQuizRequest);
     }
+
+
+//    @GetMapping("/{uuid}")
+//    public VideoDto getVideoByUUID(@PathVariable UUID uuid){
+//
+//        Video video = videoService.getVideoByUUID(uuid);
+//        return VideoDto.builder()
+//                .url("https://www.youtube.com/watch?v=rFA6xkdIKVU")
+//                .quizzes(video.getQuizzes())
+//                .build();
+//    }
 }

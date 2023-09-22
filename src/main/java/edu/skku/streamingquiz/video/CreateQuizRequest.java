@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class CreateQuizRequest {
@@ -13,7 +14,7 @@ public class CreateQuizRequest {
     private String question;
 
 //    private List<Choice> choiceList;
-    private Long videoId;
+    private UUID videoId;
 
     private String answer;
 

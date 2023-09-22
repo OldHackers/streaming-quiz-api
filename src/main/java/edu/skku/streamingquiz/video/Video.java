@@ -16,11 +16,8 @@ import java.util.UUID;
 @Builder
 public class Video {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(length = 16)
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String title;
 
@@ -30,8 +27,4 @@ public class Video {
             cascade = CascadeType.ALL)
     private List<Quiz> quizzes;
 
-    @PrePersist
-    public void createUUID() {
-        this.uuid = UuidCreator.getTimeOrdered();
-    }
 }
