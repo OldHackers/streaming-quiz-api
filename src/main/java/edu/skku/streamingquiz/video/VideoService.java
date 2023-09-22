@@ -22,6 +22,7 @@ public class VideoService {
 
         return VideoDto.builder()
                 .url(video.getUrl())
+                .title(video.getTitle())
                 .quizzes(video.getQuizzes())
                 .build();
     }
@@ -58,6 +59,13 @@ public class VideoService {
                     .build();
             choiceRepository.save(choice);
         }
+    }
+
+    public void updateVideo(UUID videoId, UploadVideoRequest updateVideoRequest) {
+        Video video = videoRepository.findById(videoId).orElseThrow(IllegalAccessError::new);
+        video.setTitle(updateVideoRequest.getTitle());
+        video.setUrl(updateVideoRequest.getUrl());
+        videoRepository.save(video);
     }
 
 //    public Video getVideoByUUID(UUID uuid) {

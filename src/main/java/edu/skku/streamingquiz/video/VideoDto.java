@@ -9,6 +9,7 @@ import java.util.List;
 @Builder
 @Getter
 public class VideoDto {
+    private String title;
     private String url;
     private List<Quiz> quizzes;
 }

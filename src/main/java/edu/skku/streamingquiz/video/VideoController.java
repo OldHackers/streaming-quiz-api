@@ -20,6 +20,11 @@ public class VideoController {
         return videoService.getVideoData(videoId);
     }
 
+    @PatchMapping("/{videoId}")
+    public void updateVideo(@PathVariable UUID videoId, @RequestBody UploadVideoRequest updateVideoRequest) {
+        videoService.updateVideo(videoId, updateVideoRequest);
+    }
+
     @GetMapping("/test/{videoId}")
     public VideoDto testVideo(@PathVariable UUID videoId) {
 
