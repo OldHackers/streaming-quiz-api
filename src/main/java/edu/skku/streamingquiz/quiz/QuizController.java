@@ -12,4 +12,5 @@ public class QuizController {
     public String getQuiz() {
         return "What is the answer to life, the universe, and everything?";
     }
+
 }
